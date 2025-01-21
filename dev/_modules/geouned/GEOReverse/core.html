@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>geouned.GEOReverse.core &#8212; GEOUNED 0.1.dev1+g6c41e53 documentation</title>
+    <title>geouned.GEOReverse.core &#8212; GEOUNED 0.1.dev1+ga5948c1 documentation</title>
   
   
   
@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,32 +26,33 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=de1be99c"></script>
+    <script src="../../../_static/documentation_options.js?v=356e76c2"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/geouned/GEOReverse/core';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/GEOUNED-org/GEOUNED/dev/docs/version_switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1';
-        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g6c41e53" />
+  <meta name="docsearch:version" content="0.1.dev1+ga5948c1" />
   </head>
   
   
@@ -327,9 +328,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -376,29 +382,29 @@
                 <article class="bd-article">
                   
   <h1>Source code for geouned.GEOReverse.core</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span>
-<span class="kn">import</span> <span class="nn">FreeCAD</span>
-<span class="kn">import</span> <span class="nn">Import</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">FreeCAD</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">Import</span>
 
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">.Modules.buildCAD</span> <span class="kn">import</span> <span class="n">buildCAD</span><span class="p">,</span> <span class="n">makeTree</span>
-<span class="kn">from</span> <span class="nn">.Modules.MCNPinput</span> <span class="kn">import</span> <span class="n">McnpInput</span>
-<span class="kn">from</span> <span class="nn">.Modules.Objects</span> <span class="kn">import</span> <span class="n">CadCell</span>
-<span class="kn">from</span> <span class="nn">.Modules.XMLinput</span> <span class="kn">import</span> <span class="n">XmlInput</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.Modules.buildCAD</span><span class="w"> </span><span class="kn">import</span> <span class="n">buildCAD</span><span class="p">,</span> <span class="n">makeTree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.Modules.MCNPinput</span><span class="w"> </span><span class="kn">import</span> <span class="n">McnpInput</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.Modules.Objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">CadCell</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.Modules.XMLinput</span><span class="w"> </span><span class="kn">import</span> <span class="n">XmlInput</span>
 
 
 <div class="viewcode-block" id="CsgToCad">
 <a class="viewcode-back" href="../../../python_api.html#geouned.CsgToCad">[docs]</a>
-<span class="k">class</span> <span class="nc">CsgToCad</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsgToCad</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for the conversion of CSG to CAD models&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
 
 <div class="viewcode-block" id="CsgToCad.export_cad">
 <a class="viewcode-back" href="../../../python_api.html#geouned.CsgToCad.export_cad">[docs]</a>
-    <span class="k">def</span> <span class="nf">export_cad</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_cad</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">input_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">csg_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -524,8 +530,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -558,7 +564,8 @@
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
