@@ -83,6 +83,8 @@ def load_cad(filename, spline_surf, settings, options):
                 continue
             else:
                 tempre_mat = None
+                tempre_fill = None
+                tempre_trans = None
                 tempre_dil = None
 
                 # MIO: lightly modification of label if required
@@ -114,6 +116,22 @@ def load_cad(filename, spline_surf, settings, options):
                         # MIO: Modification of label if required
                         temp_label = LF.get_label(xelem[0].Label, options)
                         tempre_mat = re.search("_m(?P<mat>\d+)_", "_" + temp_label)
+                        xelem = xelem[0].InList
+
+                    # Search for universe fill definition in tree
+                    xelem = [elem]
+                    while xelem and not tempre_fill:
+                        # MIO: Modification of label if required
+                        temp_label = LF.get_label(xelem[0].Label, options)
+                        tempre_fill = re.search("_f(?P<fill>\d+)_", "_" + temp_label)
+                        xelem = xelem[0].InList
+
+                    # Search for universe transform definition in tree
+                    xelem = [elem]
+                    while xelem and not tempre_trans:
+                        # MIO: Modification of label if required
+                        temp_label = LF.get_label(xelem[0].Label, options)
+                        tempre_trans = re.search("_t(?P<trans>\d+)_", "_" + temp_label)
                         xelem = xelem[0].InList
 
                     # Search for dilution definition in tree
@@ -161,6 +179,13 @@ def load_cad(filename, spline_surf, settings, options):
                         # logger.warning('No material label associated to solid {}.\nDefault material used instead.'.format(comment))
                         if settings.voidMat:
                             meta_list[i_solid].set_material(*settings.voidMat)
+
+                    if tempre_fill:
+                        meta_list[i_solid].set_universe_fill(int(tempre_fill.group("fill")))
+
+                    if tempre_trans:
+                        meta_list[i_solid].set_transform(int(tempre_trans.group("trans")))
+
                     if tempre_dil:
                         meta_list[i_solid].set_dilution(float(tempre_dil.group("dil")))
 
